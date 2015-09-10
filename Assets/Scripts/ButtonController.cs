@@ -22,4 +22,9 @@ public class ButtonController : MonoBehaviour {
 	public void LoadTuningVariables () {
 		Application.LoadLevel(Global.TuningScene);
 	}
+
+	// Loads the summary screen
+	public void LoadSummaryScreen () {
+		Application.LoadLevel(Global.SummaryScene);
+	}
 }

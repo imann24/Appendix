@@ -5,4 +5,5 @@ public class Global {
 	public const string StartScene = "Start";
 	public const string GameScene = "Game";
 	public const string TuningScene = "Tuning";
+	public const string SummaryScene = "Summary";
 }
