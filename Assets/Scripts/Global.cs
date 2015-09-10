@@ -44,8 +44,8 @@ public class Global {
 	public static void RetrieveSettings () {
 		GameLength = PlayerPrefs.GetFloat(GameLengthKey, 10.0f);
 		RedFontTime = PlayerPrefs.GetFloat(RedFontTimeThresholdKey, 5.0f);
-		GridWidth = PlayerPrefs.GetFloat(GridWidthKey, 8);
-		GridHeight = PlayerPrefs.GetFloat(GridHeightKey, 5);
+		GridWidth = PlayerPrefs.GetInt(GridWidthKey, 8);
+		GridHeight = PlayerPrefs.GetInt(GridHeightKey, 5);
 		StartButtonText = PlayerPrefs.GetString(StartButtonTextKey, "Start");
 		TuningButtonText = PlayerPrefs.GetString(TuningButtonTextKey, "Tuning Variables");
 	}
