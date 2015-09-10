@@ -1,15 +1,25 @@
-﻿using UnityEngine;
+﻿/*
+ * Used to perform the functions on the buttons in the game
+ * The primary use is for loading new scenes
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class ButtonController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	// Loads the main game
+	public void LoadGame () {
+		Application.LoadLevel(Global.GameScene);
+	}
+
+	// Loads the start scene
+	public void LoadStart () {
+		Application.LoadLevel(Global.StartScene);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	// Loads the tuning variables
+	public void LoadTuningVariables () {
+		Application.LoadLevel(Global.TuningScene);
 	}
 }
