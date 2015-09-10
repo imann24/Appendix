@@ -28,15 +28,8 @@ public class ButtonController : MonoBehaviour {
 		Application.LoadLevel(Global.SummaryScene);
 	}
 
-	/*GameLength = 10 seconds
-		RedFontTimeThreshold = 5 seconds
-			GridWidth = 8
-			GridHeight = 5
-			Start button text on Menu screen: “Start”
-			Tuning variables button text on Menu screen: “Tuning Variables”*/
+	// Tries to save the settings
+	public void SaveSettings () {
 
-	// Saves the settings of the game
-	public void SaveSettings (float GameLength, float RedFondTimeThreshold, int GridWidth, int GridHeight, string StartButtonText, string TuningButtonText) {
-		//PlayerPrefs.SetFloat(
 	}
 }

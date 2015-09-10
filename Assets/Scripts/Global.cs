@@ -9,6 +9,7 @@ using System.Collections;
 public class Global {
 
 	#region Scenes
+	// The scenes names are keys used to load the scenes with the Application.LoadLevel method
 	public const string StartScene = "Start";
 	public const string GameScene = "Game";
 	public const string TuningScene = "Tuning";
@@ -16,13 +17,15 @@ public class Global {
 	#endregion
 
 	#region Settings
-	public const string GameLengthKey = "GameLength";
-	public const string RedFontTimeThresholdKey = "RedFontTime";
+	// These are keys used to retreive the saved settings via PlayerPrefs
+	public const string GameLengthKey = "GameTime";
+	public const string RedFontTimeThresholdKey = "RedFontTimeThreshold";
 	public const string GridWidthKey = "GridWidth";
 	public const string GridHeightKey = "GridHeight";
 	public const string StartButtonTextKey = "StartButtonText";
 	public const string TuningButtonTextKey = "TuningButtonText";
 
+	// The setting variables
 	public static float GameLength;
 	public static float RedFontTime;
 	public static int GridWidth;
@@ -31,15 +34,19 @@ public class Global {
 	public static string TuningButtonText;
 
 	// Saves the settings
-	public static void SaveSettings (float GameLength, float RedFondTimeThreshold, int GridWidth, int GridHeight, string StartButtonText, string TuningButtonText) {
+	public static void SaveSettings (float GameLength, float RedFontTimeThreshold, int GridWidth, int GridHeight, string StartButtonText, string TuningButtonText) {
 		PlayerPrefs.SetFloat(GameLengthKey, GameLength);
-		PlayerPrefs.SetFloat(RedFontTimeThresholdKey, RedFondTimeThreshold);
-		PlayerPrefs.SetFloat(GridWidthKey, GridWidth);
-		PlayerPrefs.SetFloat(GridHeightKey, GridHeight);
+		PlayerPrefs.SetFloat(RedFontTimeThresholdKey, RedFontTimeThreshold);
+		PlayerPrefs.SetInt(GridWidthKey, GridWidth);
+		PlayerPrefs.SetInt(GridHeightKey, GridHeight);
 		PlayerPrefs.SetString(StartButtonTextKey, StartButtonText);
 		PlayerPrefs.SetString(TuningButtonTextKey, TuningButtonText);
 	}
 
+	//Saves the settings to player prefs based of their current values
+	public static void SaveSettings () {
+		SaveSettings (GameLength, RedFontTime, GridWidth, GridHeight, StartButtonText, TuningButtonText);
+	}
 	// Retrieves the persistent saved settings
 	public static void RetrieveSettings () {
 		GameLength = PlayerPrefs.GetFloat(GameLengthKey, 10.0f);
