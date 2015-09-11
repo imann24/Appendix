@@ -17,6 +17,7 @@ public class Global {
 	#endregion
 
 	#region Settings
+
 	// These are keys used to retreive the saved settings via PlayerPrefs
 	public const string GameLengthKey = "GameTime";
 	public const string RedFontTimeThresholdKey = "RedFontTimeThreshold";
@@ -25,7 +26,11 @@ public class Global {
 	public const string StartButtonTextKey = "StartButtonText";
 	public const string TuningButtonTextKey = "TuningButtonText";
 
+	public const string GameScoreKey = "Score";
+	public const string GameResultKey = "Result";
+
 	// The setting variables
+	public static float ScoreModifier = 10;
 	public static float GameLength;
 	public static float RedFontTime;
 	public static int GridWidth;
@@ -57,5 +62,8 @@ public class Global {
 		TuningButtonText = PlayerPrefs.GetString(TuningButtonTextKey, "Tuning Variables");
 	}
 
+	public static int GetScore (int BooksRemaining, float TimeRemaining) {
+		return (int) ((BooksRemaining + TimeRemaining) * ScoreModifier);
+	}
 	#endregion
 }

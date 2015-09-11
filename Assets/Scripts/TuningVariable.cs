@@ -43,7 +43,6 @@ public class TuningVariable : MonoBehaviour {
 			inputField.text = PlayerPrefs.GetFloat(gameObject.name).ToString();
 		} else if (gameObject.name.Contains(DIMENSION_VAR)) {
 			validValue = ValidDimension;
-			Debug.Log(PlayerPrefs.GetInt(gameObject.name));	
 			inputField.text = PlayerPrefs.GetInt(gameObject.name).ToString();
 		} else if (gameObject.name.Contains(TEXT_VAR)) {
 			validValue = ValidButtonLabel;

@@ -7,6 +7,11 @@ using UnityEngine;
 using System.Collections;
 
 public class ButtonController : MonoBehaviour {
+	public static ButtonController Instance;
+
+	void Start () {
+		Instance = this;
+	}
 
 	// Loads the main game
 	public void LoadGame () {
@@ -30,6 +35,8 @@ public class ButtonController : MonoBehaviour {
 
 	// Tries to save the settings
 	public void SaveSettings () {
-
+		if (!TuningController.Instance.TrySaveSettings()) {
+			Debug.Log("Failed to save. Invalid values");
+		}
 	}
 }

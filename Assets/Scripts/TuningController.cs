@@ -23,7 +23,12 @@ public class TuningController : MonoBehaviour {
 	// Attempts to save the settings
 	public bool TrySaveSettings () {
 		if (ValidSettings()) {
-
+			SaveSettings(float.Parse(TuningVariable.AllTuningVariables[Global.GameLengthKey].GetValue()), 
+			             float.Parse(TuningVariable.AllTuningVariables[Global.RedFontTimeThresholdKey].GetValue()),
+			             int.Parse(TuningVariable.AllTuningVariables[Global.GridWidthKey].GetValue()),
+			             int.Parse(TuningVariable.AllTuningVariables[Global.GridHeightKey].GetValue()),
+			             TuningVariable.AllTuningVariables[Global.StartButtonTextKey].GetValue(),
+			             TuningVariable.AllTuningVariables[Global.TuningButtonTextKey].GetValue());
 			return true;
 		} else {
 			return false;
