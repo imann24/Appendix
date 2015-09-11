@@ -43,7 +43,7 @@ public class Book : MonoBehaviour {
 			myMaterial.color = IsAppendixColor;
 			Clickable = false;
 			if (OnWin != null) {
-				Invoke("TriggerOnWin", 0.5f);
+				StartCoroutine(TriggerOnWin());
 			}
 		} else {
 			UnclickedBooks--;
@@ -52,10 +52,17 @@ public class Book : MonoBehaviour {
 	}
 
 	// Triggers the win event
-	void TriggerOnWin () {
+	IEnumerator TriggerOnWin () {
+		yield return new WaitForSeconds(0.5f);
+
+#if UNITY_WEBGL
+		GameController.Instance.SaveSession(true,Global.GetScore(UnclickedBooks, GameController.Instance.SecondsRemaining));
+		ButtonController.Instance.LoadSummaryScreen();
+#else
 		if (OnWin != null) {
 			OnWin(true, (Global.GetScore(UnclickedBooks, GameController.Instance.SecondsRemaining)));
 		}
+#endif
 
 		ButtonController.Instance.LoadSummaryScreen();
 	}

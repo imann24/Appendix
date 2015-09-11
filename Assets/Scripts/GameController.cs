@@ -98,13 +98,18 @@ public class GameController : MonoBehaviour {
 
 	void CheckForGameOver () {
 		if (SecondsRemaining <= 0) {
+#if UNITY_WEBGL
+			SaveSession();
+			ButtonController.Instance.LoadSummaryScreen();
+#else
 			if (OnGameOver != null) {
 				OnGameOver();
 			}
+#endif
 		}
 	}
 
-	void SaveSession (bool victory = false, int score = 0) {
+	public void SaveSession (bool victory = false, int score = 0) {
 		PlayerPrefs.SetString(Global.GameResultKey, victory?VictoryText:DefeatText);
 		PlayerPrefs.SetInt(Global.GameScoreKey, score);
 	}
