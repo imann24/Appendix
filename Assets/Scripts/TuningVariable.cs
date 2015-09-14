@@ -37,7 +37,7 @@ public class TuningVariable : MonoBehaviour {
 	
 	}
 
-	void AssignValidCheckAndDefaultValue () {
+	public void AssignValidCheckAndDefaultValue () {
 		if (gameObject.name.Contains(TIME_VAR)) {
 			validValue = ValidTime;
 			inputField.text = PlayerPrefs.GetFloat(gameObject.name).ToString();
@@ -74,5 +74,9 @@ public class TuningVariable : MonoBehaviour {
 
 	public string GetValue () {
 		return inputField.text;
+	}
+
+	public void SetValue (string value) { 
+		inputField.text = value;
 	}
 }

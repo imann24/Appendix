@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 public class TuningController : MonoBehaviour {
 	public static TuningController Instance;
+
+	public Text InvalidSettingsText;
 
 	void Awake () {
 		Global.RetrieveSettings();
 		Global.SaveSettings();
 		Instance = this;
 	}
-
-	// Use this for initialization
-	void Start () {
-
-	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	// Attempts to save the settings
 	public bool TrySaveSettings () {
@@ -31,6 +25,7 @@ public class TuningController : MonoBehaviour {
 			             TuningVariable.AllTuningVariables[Global.TuningButtonTextKey].GetValue());
 			return true;
 		} else {
+			StartCoroutine(InvalidSettingsErrorMessage());
 			return false;
 		}
 	}
@@ -50,4 +45,30 @@ public class TuningController : MonoBehaviour {
 		return true;
 	}
 
+	// Resets all tuning variables to default
+	public void ResetValuesToDefault () {
+		foreach (KeyValuePair<string, TuningVariable> tuningVar in TuningVariable.AllTuningVariables) {
+			tuningVar.Value.AssignValidCheckAndDefaultValue();
+		}
+		
+
+	}
+
+	// Fades error message in an out when input is incorrect for tuning variables
+	IEnumerator InvalidSettingsErrorMessage () {
+		float fadeRate = 0.05f;
+		float pauseRate = 1.0f;
+
+		Color textColor = InvalidSettingsText.color;
+		while (InvalidSettingsText.color.a < 1.0f) {
+			InvalidSettingsText.color = new Color(textColor.r, textColor.g, textColor.b, InvalidSettingsText.color.a + fadeRate);
+			yield return new WaitForEndOfFrame();
+		}
+
+		yield return new WaitForSeconds(pauseRate);
+		while (InvalidSettingsText.color.a > 0.0f) {
+			InvalidSettingsText.color = new Color(textColor.r, textColor.g, textColor.b, InvalidSettingsText.color.a - fadeRate);
+			yield return new WaitForEndOfFrame();
+		}
+	}
 }

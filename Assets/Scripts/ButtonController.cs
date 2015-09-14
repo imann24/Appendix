@@ -39,4 +39,9 @@ public class ButtonController : MonoBehaviour {
 			Debug.Log("Failed to save. Invalid values");
 		}
 	}
+
+	public void RevertSettingsToDefault () {
+		Global.ResetSettingsToDefault();
+		TuningController.Instance.ResetValuesToDefault();
+	}
 }

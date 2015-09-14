@@ -54,8 +54,7 @@ public class Book : MonoBehaviour {
 	// Triggers the win event
 	IEnumerator TriggerOnWin () {
 		yield return new WaitForSeconds(0.5f);
-
-#if UNITY_WEBGL
+#if UNITY_WEBGL || UNITY_WEBPLAYER
 		GameController.Instance.SaveSession(true,Global.GetScore(UnclickedBooks, GameController.Instance.SecondsRemaining));
 		ButtonController.Instance.LoadSummaryScreen();
 #else

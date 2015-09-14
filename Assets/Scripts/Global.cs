@@ -17,6 +17,13 @@ public class Global {
 	#endregion
 
 	#region Settings
+	// Default values
+	public const float DEFAULT_GAME_LENGTH = 10f;
+	public const float DEFAULT_RED_FONT_TIME = 5f;
+	public const int DEFAULT_GRID_WDITH = 8;
+	public const int DEFAULT_GRID_HEIGHT = 5;
+	public const string DEFAULT_START_BUTTON_TEXT = "Start";
+	public const string DEFAULT_TUNING_BUTTON_TEXT = "Tuning Variables";
 
 	// These are keys used to retreive the saved settings via PlayerPrefs
 	public const string GameLengthKey = "GameTime";
@@ -54,12 +61,22 @@ public class Global {
 	}
 	// Retrieves the persistent saved settings
 	public static void RetrieveSettings () {
-		GameLength = PlayerPrefs.GetFloat(GameLengthKey, 10.0f);
-		RedFontTime = PlayerPrefs.GetFloat(RedFontTimeThresholdKey, 5.0f);
-		GridWidth = PlayerPrefs.GetInt(GridWidthKey, 8);
-		GridHeight = PlayerPrefs.GetInt(GridHeightKey, 5);
-		StartButtonText = PlayerPrefs.GetString(StartButtonTextKey, "Start");
-		TuningButtonText = PlayerPrefs.GetString(TuningButtonTextKey, "Tuning Variables");
+		GameLength = PlayerPrefs.GetFloat(GameLengthKey, DEFAULT_GAME_LENGTH);
+		RedFontTime = PlayerPrefs.GetFloat(RedFontTimeThresholdKey, DEFAULT_RED_FONT_TIME);
+		GridWidth = PlayerPrefs.GetInt(GridWidthKey, DEFAULT_GRID_WDITH);
+		GridHeight = PlayerPrefs.GetInt(GridHeightKey, DEFAULT_GRID_HEIGHT);
+		StartButtonText = PlayerPrefs.GetString(StartButtonTextKey, DEFAULT_START_BUTTON_TEXT);
+		TuningButtonText = PlayerPrefs.GetString(TuningButtonTextKey, DEFAULT_TUNING_BUTTON_TEXT);
+	}
+
+	public static void ResetSettingsToDefault () {
+		PlayerPrefs.SetFloat(GameLengthKey, DEFAULT_GAME_LENGTH);
+		PlayerPrefs.SetFloat(RedFontTimeThresholdKey, DEFAULT_RED_FONT_TIME);
+		PlayerPrefs.SetInt(GridWidthKey, DEFAULT_GRID_WDITH);
+		PlayerPrefs.SetInt(GridHeightKey, DEFAULT_GRID_HEIGHT);
+		PlayerPrefs.SetString(StartButtonTextKey, DEFAULT_START_BUTTON_TEXT);
+		PlayerPrefs.SetString(TuningButtonTextKey, DEFAULT_TUNING_BUTTON_TEXT);
+		RetrieveSettings();
 	}
 
 	public static int GetScore (int BooksRemaining, float TimeRemaining) {
