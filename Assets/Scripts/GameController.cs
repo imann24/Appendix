@@ -116,6 +116,11 @@ public class GameController : MonoBehaviour {
 	public void SaveSession (bool victory = false, int score = 0) {
 		PlayerPrefs.SetString(Global.GameResultKey, victory?VictoryText:DefeatText);
 		PlayerPrefs.SetInt(Global.GameScoreKey, score);
+
+		// Adds a high score
+		if (Global.IsHighScore(score)) {
+			Global.AddHighScore(score);
+		}
 	}
 
 	void SubscribeEvents () {

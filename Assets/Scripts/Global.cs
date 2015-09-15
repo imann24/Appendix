@@ -83,4 +83,61 @@ public class Global {
 		return (int) ((BooksRemaining + TimeRemaining) * ScoreModifier);
 	}
 	#endregion
+
+	#region High Scores
+	public const int HIGH_SCORE_COUNT = 3;
+	public const string HIGH_SCORE_KEY = "High Score";
+
+	public static bool IsHighScore (int score) {
+		for (int i = 0; i < HIGH_SCORE_COUNT; i++) {
+			if (score > PlayerPrefs.GetInt(HIGH_SCORE_KEY + i)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	// Adds a high score
+	// Exits if the score is not a high score
+	public static void AddHighScore (int score) {
+		if (!IsHighScore(score)) {
+			Debug.Log("This was not a high score");
+			return;
+		}
+
+		for (int i = 0; i < HIGH_SCORE_COUNT; i++) {
+			if (score > PlayerPrefs.GetInt(HIGH_SCORE_KEY + i)) {
+				ShiftScores(i+1, PlayerPrefs.GetInt(HIGH_SCORE_KEY + i));
+				PlayerPrefs.SetInt(HIGH_SCORE_KEY+i, score);
+
+				Debug.Log("Setting high score to " + score);
+				return;
+			}
+		}
+
+
+	}
+
+
+	// Fetches the high scores as an integer array
+	public static int [] RetrieveHighScores () {
+		int [] highScores = new int[HIGH_SCORE_COUNT];
+
+		for (int i = 0; i < HIGH_SCORE_COUNT; i++) {
+			highScores[i] = PlayerPrefs.GetInt(HIGH_SCORE_KEY + i);
+		}
+
+		return highScores;
+	}
+
+	// Helper method to shift the scores after the new score down
+	private static void ShiftScores (int shiftIndex, int scoreToShift) {
+		while (shiftIndex < HIGH_SCORE_COUNT) {
+			PlayerPrefs.SetInt(HIGH_SCORE_KEY + shiftIndex, scoreToShift);
+			shiftIndex++;
+			scoreToShift = PlayerPrefs.GetInt(HIGH_SCORE_KEY + shiftIndex);
+		}
+	}
+	#endregion
 }
